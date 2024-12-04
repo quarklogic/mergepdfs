@@ -34,7 +34,7 @@ def process_pdfs():
     if pdf_file_count < 2:
         return f"ERROR: You must submit at least two files. Please try again"
     
-    ## Determin the name of the merged pdf filename
+    ## Determine the name of the merged pdf filename
     merged_pdf_filename = request.form['pdf_filename'] or 'merged_files.pdf'
     merged_pdf_filename = merged_pdf_filename.replace(' ', '_')
  
