@@ -7,7 +7,7 @@ import os
 import logging
 import PyPDF2
 import re
-from bokeh.plotting._tools import process_active_tools
+
 
 app = Flask(__name__)
 
