@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/carram30/anaconda3/bin/python3
 
 from wsgiref.handlers import CGIHandler
 from flask import Flask, render_template, request, Response
@@ -113,14 +113,19 @@ def index():
         logging.info('Processing POST request')
         merged_pdf_filename = process_pdfs()
         
-        ## Determine filename from the merged_pdf_filename path
-        match = re.search('\/([^/]+)$', merged_pdf_filename)
-        merged_filename = match.group(1) if match else 'merged_files.pdf'
-        
-        response = Response(stream_pdf(merged_pdf_filename), mimetype='application/pdf')
-        response.headers["Content-Disposition"] = f"attachment; filename={merged_filename}"
-        
-        return response
+        if re.search('^ERROR', merged_pdf_filename):
+            ## Return the error message returned by process_pdfs()
+            post_message = merged_pdf_filename
+            
+        else:
+            ## Determine filename from the merged_pdf_filename path
+            match = re.search('\/([^/]+)$', merged_pdf_filename)
+            merged_filename = match.group(1) if match else 'merged_files.pdf'
+            
+            response = Response(stream_pdf(merged_pdf_filename), mimetype='application/pdf')
+            response.headers["Content-Disposition"] = f"attachment; filename={merged_filename}"
+            
+            return response
     
                
     return render_template("index.html", 
