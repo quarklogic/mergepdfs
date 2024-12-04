@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Carlos Ramirez">
+    <meta name="generator" content="Eclipse">
+    <title>PDF Merger</title>
+ 
+
+	<link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+   
+<main>
+  <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom">
+      <a href="{{ app_uri }}" class="d-flex align-items-center text-body-emphasis text-decoration-none">
+        <span class="fs-4">PDF Merger</span>
+      </a>
+    </header>
+{% if post_message %}
+        	<div class="alert alert-danger" role="alert">{{ post_message }}</div>
+{% endif %}
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+          <h2>Instructions</h2>
+          
+            <ol>
+				<li>Click on the <strong>Browse...</strong> button.</li>
+				<li>Select two or more PDF files to merge. <strong>Note:</strong> Filenames MUST end with the .pdf extension. Max Upload size: {{ max_upload }}</li>
+				<li>Enter the name of the merged filename. <strong>Note:</strong> Filenames can only contain: 
+				Letters, Numbers, Spaces, dashes (-), underscores (_)</li>
+				<li>Click on the <strong>Merge the PDFs</strong> button to merge the files</li>
+			</ol>
+		<span class="badge badge-warning">All uploaded files are deleted after each submission.</span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+		<form enctype="multipart/form-data" action="{{ app_uri }}" method="POST">
+          <h2>Merge PDFs</h2>
+          <p>Merge separate PDF documents into one PDF document.</p>
+          <div class="form-group">
+          <label><strong>1. Select your files to merge</strong></label>
+          <input class="form-control" type="file" name="pdfs" id="pdfs" multiple/>
+           <small id="uploadHelp" class="form-text text-muted">Filenames MUST end with the .pdf extension. Max Upload Size: {{ max_upload }}</small>
+          </div>
+          <br />
+          <div class="form-group">
+          <label><strong>2. Name your merged filename</strong></label>
+          <input class="form-control" type="text" name="pdf_filename" value="" placeholder="merged_files.pdf" />
+          <small id="filenameHelp" class="form-text text-muted">Filenames can only contain: 
+				Letters, Numbers, Spaces, dashes (-), underscores (_)</small>
+          </div>
+          <br />
+          <button class="btn btn-primary btn-lg" type="submit">Merge the PDFs</button> 
+          </form>
+			</div>
+        </div>
+      </div>
+    </div>
+    <footer class="pt-3 mt-4 text-body-secondary border-top">
+      &nbsp; &nbsp;QuarkLogic &copy; 2024
+    </footer>
+</main>
+<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
